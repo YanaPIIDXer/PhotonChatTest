@@ -31,7 +31,7 @@ namespace Sequence
             ChannelMgr.OnSubscribe
                       .Subscribe((Ch) =>
                       {
-                          LobbyMenu.OnSubscribeSuccess();
+                          LobbyMenu.OnSubscribeSuccess(Ch);
                       })
                       .AddTo(gameObject);
 

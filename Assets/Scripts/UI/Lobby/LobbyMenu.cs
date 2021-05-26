@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
+using Channel;
 
 namespace UI.Lobby
 {
@@ -17,9 +18,10 @@ namespace UI.Lobby
         IObservable<string> OnSubscribeChannel { get; }
 
         /// <summary>
-        /// 購読成功
+        /// 行動性向
         /// </summary>
-        void OnSubscribeSuccess();
+        /// <param name="SubscribedChannel">購読したチャンネル</param>
+        void OnSubscribeSuccess(Channel.Channel SubscribedChannel);
     }
 
     /// <summary>
@@ -41,7 +43,8 @@ namespace UI.Lobby
         /// <summary>
         /// 購読成功
         /// </summary>
-        public void OnSubscribeSuccess()
+        /// <param name="SubscribedChannel">購読したチャンネル</param>
+        public void OnSubscribeSuccess(Channel.Channel SubscribedChannel)
         {
             SubscribeForm.ResetChannelNameInput();
         }
