@@ -15,6 +15,11 @@ namespace UI.Lobby
         /// チャンネルを購読した
         /// </summary>
         IObservable<string> OnSubscribeChannel { get; }
+
+        /// <summary>
+        /// 購読成功
+        /// </summary>
+        void OnSubscribeSuccess();
     }
 
     /// <summary>
@@ -32,5 +37,13 @@ namespace UI.Lobby
         /// チャンネルを購読した
         /// </summary>
         public IObservable<string> OnSubscribeChannel => SubscribeForm.OnSubscribe;
+
+        /// <summary>
+        /// 購読成功
+        /// </summary>
+        public void OnSubscribeSuccess()
+        {
+            SubscribeForm.ResetChannelNameInput();
+        }
     }
 }

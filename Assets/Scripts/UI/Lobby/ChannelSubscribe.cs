@@ -44,5 +44,13 @@ namespace UI.Lobby
                             .Subscribe((IsEmpty) => SubscribeButton.interactable = !IsEmpty)
                             .AddTo(gameObject);
         }
+
+        /// <summary>
+        /// チャンネル名入力Inputのリセット
+        /// </summary>
+        public void ResetChannelNameInput()
+        {
+            ChannelNameInput.text = "";
+        }
     }
 }
