@@ -43,6 +43,10 @@ namespace UI.Lobby
                             .Select((Value) => string.IsNullOrEmpty(Value))
                             .Subscribe((IsEmpty) => SubscribeButton.interactable = !IsEmpty)
                             .AddTo(gameObject);
+
+            OnSubscribe
+                .Subscribe((_) => SubscribeButton.interactable = false)
+                .AddTo(gameObject);
         }
 
         /// <summary>
