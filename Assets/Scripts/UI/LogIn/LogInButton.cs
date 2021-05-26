@@ -33,12 +33,20 @@ namespace UI.LogIn
         /// <summary>
         /// 押された
         /// </summary>
-        public IObservable<Unit> OnPress { get { return MyButton.OnClickAsObservable(); } }
+        public IObservable<Unit> OnPress
+        {
+            get
+            {
+                if (MyButton == null)
+                {
+                    MyButton = GetComponent<Button>();
+                }
+                return MyButton.OnClickAsObservable();
+            }
+        }
 
         void Awake()
         {
-            MyButton = GetComponent<Button>();
-
             OnPress
                 .Subscribe((_) => MyButton.interactable = false)
                 .AddTo(gameObject);
