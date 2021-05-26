@@ -29,7 +29,8 @@ namespace Network
         /// </summary>
         public void Connect()
         {
-            Client = new ChatClient(new ChatClientListener());
+            var Listener = new ChatClientListener();
+            Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
             ServiceDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0 / 60))
                       .Subscribe((_) => Client.Service());
