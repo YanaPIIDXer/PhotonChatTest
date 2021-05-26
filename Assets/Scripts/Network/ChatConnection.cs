@@ -25,11 +25,27 @@ namespace Network
         private IDisposable ServiceDisposable = null;
 
         /// <summary>
+        /// 接続された時のSubject
+        /// </summary>
+        private Subject<Unit> OnConnectSubject = new Subject<Unit>();
+
+        /// <summary>
+        /// 接続された
+        /// </summary>
+        public IObservable<Unit> OnConnect { get { return OnConnectSubject; } }
+
+        /// <summary>
         /// 接続
         /// </summary>
         public void Connect()
         {
             var Listener = new ChatClientListener();
+
+            Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
+
+            // テスト用
+            OnConnect.Subscribe((_) => Client.Subscribe(new string[] { "Channel1", "Channel2", "Channel3" }));
+
             Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
             ServiceDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0 / 60))

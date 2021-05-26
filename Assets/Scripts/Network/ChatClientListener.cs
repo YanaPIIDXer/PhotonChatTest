@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Chat;
 using ExitGames.Client.Photon;
+using System;
 
 namespace Network
 {
@@ -11,6 +12,11 @@ namespace Network
     /// </summary>
     public class ChatClientListener : IChatClientListener
     {
+        /// <summary>
+        /// 接続された
+        /// </summary>
+        public Action OnConnect { set; private get; }
+
         public void DebugReturn(DebugLevel level, string message)
         {
             if (level != DebugLevel.ERROR)
@@ -31,6 +37,7 @@ namespace Network
         public void OnConnected()
         {
             DebugReturn(DebugLevel.INFO, "OnConnected");
+            OnConnect?.Invoke();
         }
 
         public void OnDisconnected()
@@ -52,6 +59,18 @@ namespace Network
 
         public void OnSubscribed(string[] channels, bool[] results)
         {
+            DebugReturn(DebugLevel.INFO, "OnSubscribed");
+            for (int i = 0; i < channels.Length; i++)
+            {
+                if (results[i])
+                {
+                    DebugReturn(DebugLevel.INFO, channels[i]);
+                }
+                else
+                {
+                    DebugReturn(DebugLevel.ERROR, channels[i]);
+                }
+            }
         }
 
         public void OnUnsubscribed(string[] channels)
