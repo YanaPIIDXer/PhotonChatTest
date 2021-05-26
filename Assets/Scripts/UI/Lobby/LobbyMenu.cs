@@ -21,7 +21,7 @@ namespace UI.Lobby
         /// 行動性向
         /// </summary>
         /// <param name="SubscribedChannel">購読したチャンネル</param>
-        void OnSubscribeSuccess(Channel.Channel SubscribedChannel);
+        void OnSubscribeSuccess(IChannel SubscribedChannel);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ namespace UI.Lobby
         /// 購読成功
         /// </summary>
         /// <param name="SubscribedChannel">購読したチャンネル</param>
-        public void OnSubscribeSuccess(Channel.Channel SubscribedChannel)
+        public void OnSubscribeSuccess(IChannel SubscribedChannel)
         {
             SubscribeForm.ResetChannelNameInput();
         }

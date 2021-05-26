@@ -6,9 +6,20 @@ using Photon.Chat;
 namespace Channel
 {
     /// <summary>
+    /// チャンネルインタフェース
+    /// </summary>
+    public interface IChannel
+    {
+        /// <summary>
+        /// チャンネル名
+        /// </summary>
+        string Name { get; }
+    }
+
+    /// <summary>
     /// チャンネルクラス
     /// </summary>
-    public class Channel
+    public class Channel : IChannel
     {
         /// <summary>
         /// チャンネル名
