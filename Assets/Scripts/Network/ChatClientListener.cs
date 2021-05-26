@@ -47,6 +47,11 @@ namespace Network
 
         public void OnGetMessages(string channelName, string[] senders, object[] messages)
         {
+            DebugReturn(DebugLevel.INFO, "OnGetMessage Channel:" + channelName);
+            foreach (var Message in messages)
+            {
+                DebugReturn(DebugLevel.INFO, Message.ToString());
+            }
         }
 
         public void OnPrivateMessage(string sender, object message, string channelName)
@@ -79,10 +84,16 @@ namespace Network
 
         public void OnUserSubscribed(string channel, string user)
         {
+            DebugReturn(DebugLevel.INFO, "User Subscribe.");
+            DebugReturn(DebugLevel.INFO, "Channel:" + channel);
+            DebugReturn(DebugLevel.INFO, "User:" + user);
         }
 
         public void OnUserUnsubscribed(string channel, string user)
         {
+            DebugReturn(DebugLevel.INFO, "User Unsubscribe.");
+            DebugReturn(DebugLevel.INFO, "Channel:" + channel);
+            DebugReturn(DebugLevel.INFO, "User:" + user);
         }
     }
 }
