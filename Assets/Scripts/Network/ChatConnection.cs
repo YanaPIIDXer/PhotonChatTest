@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Chat;
 using UniRx;
 using UniRx.Operators;
+using Environments;
+using System;
 
 namespace Network
 {
@@ -13,10 +15,24 @@ namespace Network
     public class ChatConnection
     {
         /// <summary>
+        /// ChatClient
+        /// </summary>
+        private ChatClient Client = null;
+
+        /// <summary>
+        /// ClientのServiceメソッドを呼び続けるObservable
+        /// </summary>
+        private IDisposable ServiceDisposable = null;
+
+        /// <summary>
         /// 接続
         /// </summary>
         public void Connect()
         {
+            Client = new ChatClient(new ChatClientListener());
+            Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
+            ServiceDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0 / 60))
+                      .Subscribe((_) => Client.Service());
         }
 
         /// <summary>
@@ -24,6 +40,14 @@ namespace Network
         /// </summary>
         public void Disconnect()
         {
+            if (Client != null)
+            {
+                ServiceDisposable.Dispose();
+                ServiceDisposable = null;
+
+                Client.Disconnect();
+                Client = null;
+            }
         }
 
         #region Singleton
