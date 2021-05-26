@@ -37,12 +37,12 @@ namespace Network
         /// <summary>
         /// チャンネルをSubscribeした時のSubject
         /// </summary>
-        private Subject<string> OnSubscribeChannelSubject = new Subject<string>();
+        private Subject<ChatChannel> OnSubscribeChannelSubject = new Subject<ChatChannel>();
 
         /// <summary>
         /// チャンネルをSubscribeした
         /// </summary>
-        public IObservable<string> OnSubscribeChannel { get { return OnSubscribeChannelSubject; } }
+        public IObservable<ChatChannel> OnSubscribeChannel { get { return OnSubscribeChannelSubject; } }
 
         /// <summary>
         /// 接続
@@ -55,18 +55,17 @@ namespace Network
             var Listener = new ChatClientListener();
 
             Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
-            Listener.OnSubscribeChannel = (Channel) => OnSubscribeChannelSubject.OnNext(Channel);
+            Listener.OnSubscribeChannel = (Channel) =>
+            {
+                var Ch = Client.PublicChannels[Channel];
+                OnSubscribeChannelSubject.OnNext(Ch);
+            };
 
             // === テスト ===
             OnConnect.Subscribe((_) => Client.Subscribe("Test"));
             OnSubscribeChannel.Subscribe((Channel) =>
             {
-                // ここを通るタイミングでは、Client.PublicChannelsにデータが入っている
-                Debug.Log("PublicChannel Count:" + Client.PublicChannels.Count);
-                foreach (var Kv in Client.PublicChannels)
-                {
-                    Debug.Log(Kv.Value.Name);
-                }
+                Debug.Log("Subscribe:" + Channel.Name);
             });
             // =============
 
