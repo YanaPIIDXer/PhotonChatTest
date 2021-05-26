@@ -36,18 +36,15 @@ namespace Network
 
         public void OnChatStateChange(ChatState state)
         {
-            DebugReturn(DebugLevel.INFO, "ChatState:" + state.ToString());
         }
 
         public void OnConnected()
         {
-            DebugReturn(DebugLevel.INFO, "OnConnected");
             OnConnect?.Invoke();
         }
 
         public void OnDisconnected()
         {
-            DebugReturn(DebugLevel.INFO, "OnDisconnected");
         }
 
         public void OnGetMessages(string channelName, string[] senders, object[] messages)
@@ -69,17 +66,11 @@ namespace Network
 
         public void OnSubscribed(string[] channels, bool[] results)
         {
-            DebugReturn(DebugLevel.INFO, "OnSubscribed");
             for (int i = 0; i < channels.Length; i++)
             {
                 if (results[i])
                 {
-                    DebugReturn(DebugLevel.INFO, channels[i]);
                     OnSubscribeChannel?.Invoke(channels[i]);
-                }
-                else
-                {
-                    DebugReturn(DebugLevel.ERROR, channels[i]);
                 }
             }
         }

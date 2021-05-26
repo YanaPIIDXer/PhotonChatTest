@@ -61,14 +61,6 @@ namespace Network
                 OnSubscribeChannelSubject.OnNext(Ch);
             };
 
-            // === テスト ===
-            OnConnect.Subscribe((_) => Client.Subscribe("Test"));
-            OnSubscribeChannel.Subscribe((Channel) =>
-            {
-                Debug.Log("Subscribe:" + Channel.Name);
-            });
-            // =============
-
             Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
             ServiceDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0 / 60))
