@@ -6,6 +6,7 @@ using Zenject;
 using UniRx;
 using System;
 using Network;
+using UnityEngine.SceneManagement;
 
 namespace Sequence
 {
@@ -24,8 +25,7 @@ namespace Sequence
             ChatConnection.Intsance.OnConnect
                                    .Subscribe((_) =>
                                    {
-                                       Debug.Log("LogIn Success!!");
-                                       Debug.Log("TODO:シーン遷移");
+                                       SceneManager.LoadScene("Lobby");
                                    });
             Btn.OnPress
                .Subscribe((_) => ChatConnection.Intsance.Connect());
