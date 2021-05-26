@@ -54,11 +54,6 @@ namespace Network
             Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
             Listener.OnSubscribeChannel = (Channel) => OnSubscribeChannelSubject.OnNext(Channel);
 
-            // ===== テスト用 ======
-            OnConnect.Subscribe((_) => Client.Subscribe(new string[] { "Channel1", "Channel2", "Channel3" }));
-            OnSubscribeChannel.Subscribe((Channel) => Client.PublishMessage(Channel, Channel + "Test"));
-            // ====================
-
             Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
             ServiceDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0 / 60))
