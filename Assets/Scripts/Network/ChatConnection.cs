@@ -35,6 +35,16 @@ namespace Network
         public IObservable<Unit> OnConnect { get { return OnConnectSubject; } }
 
         /// <summary>
+        /// チャンネルをSubscribeした時のSubject
+        /// </summary>
+        private Subject<string> OnSubscribeChannelSubject = new Subject<string>();
+
+        /// <summary>
+        /// チャンネルをSubscribeした
+        /// </summary>
+        public IObservable<string> OnSubscribeChannel { get { return OnSubscribeChannelSubject; } }
+
+        /// <summary>
         /// 接続
         /// </summary>
         public void Connect()
@@ -42,10 +52,11 @@ namespace Network
             var Listener = new ChatClientListener();
 
             Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
+            Listener.OnSubscribeChannel = (Channel) => OnSubscribeChannelSubject.OnNext(Channel);
 
             // ===== テスト用 ======
             OnConnect.Subscribe((_) => Client.Subscribe(new string[] { "Channel1", "Channel2", "Channel3" }));
-            Listener.OnSubscribeChannel = (Channel) => Client.PublishMessage(Channel, "Test");
+            OnSubscribeChannel.Subscribe((Channel) => Client.PublishMessage(Channel, Channel + "Test"));
             // ====================
 
             Client = new ChatClient(Listener);
