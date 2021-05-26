@@ -14,13 +14,11 @@ namespace Sequence
     {
         void Awake()
         {
-            /*
-            ChatConnection.Instance.OnsSubscribeChannel
+            ChatConnection.Instance.OnSubscribeChannel
                     .Subscribe((Ch) => Debug.Log(Ch.Name))
                     .AddTo(gameObject);
 
             ChatConnection.Instance.SubscribeChannel("Test");
-            */
         }
     }
 }

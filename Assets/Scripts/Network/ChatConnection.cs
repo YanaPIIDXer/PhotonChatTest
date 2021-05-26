@@ -93,7 +93,7 @@ namespace Network
         }
 
         #region Singleton
-        public static ChatConnection Intsance { get { return _Instance; } }
+        public static ChatConnection Instance { get { return _Instance; } }
         private static ChatConnection _Instance = new ChatConnection();
         private ChatConnection() { }
         #endregion

@@ -22,13 +22,13 @@ namespace Sequence
         [Inject]
         private void OnLogInButton(ILogInButton Btn)
         {
-            ChatConnection.Intsance.OnConnect
+            ChatConnection.Instance.OnConnect
                                    .Subscribe((_) =>
                                    {
                                        SceneManager.LoadScene("Lobby");
                                    });
             Btn.OnPress
-               .Subscribe((_) => ChatConnection.Intsance.Connect());
+               .Subscribe((_) => ChatConnection.Instance.Connect());
         }
     }
 }
