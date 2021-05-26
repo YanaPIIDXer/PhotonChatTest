@@ -1,0 +1,6 @@
+@startuml クラス図
+namespace Network {
+    class ChatConnect {
+    }
+}
+@enduml
