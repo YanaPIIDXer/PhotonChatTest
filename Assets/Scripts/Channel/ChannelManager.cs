@@ -29,5 +29,15 @@ namespace Channel
         {
             ChannelDic[NewChannel.Name] = NewChannel;
         }
+
+        /// <summary>
+        /// 指定したチャンネルは存在するか？
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        /// <returns>存在するならtrue</returns>
+        public bool Exists(string ChannelName)
+        {
+            return ChannelDic.ContainsKey(ChannelName);
+        }
     }
 }

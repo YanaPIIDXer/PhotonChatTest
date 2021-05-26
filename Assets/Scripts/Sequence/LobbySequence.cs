@@ -23,12 +23,15 @@ namespace Sequence
             ChatConnection.Instance.OnSubscribeChannel
                     .Subscribe((Ch) =>
                     {
+                        if (ChannelMgr.Exists(Ch.Name))
+                        {
+                            Debug.LogError(Ch.Name + " is exists.");
+                            return;
+                        }
                         var NewChannel = new Channel.Channel(Ch);
                         ChannelMgr.Add(NewChannel);
                     })
                     .AddTo(gameObject);
-
-            ChatConnection.Instance.SubscribeChannel("Test");
         }
     }
 }
