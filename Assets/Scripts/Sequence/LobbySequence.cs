@@ -28,6 +28,13 @@ namespace Sequence
 
         void Awake()
         {
+            ChannelMgr.OnSubscribe
+                      .Subscribe((Ch) =>
+                      {
+                          LobbyMenu.OnSubscribeSuccess();
+                      })
+                      .AddTo(gameObject);
+
             ChatConnection.Instance.OnSubscribeChannel
                     .Subscribe((Ch) =>
                     {
@@ -39,7 +46,6 @@ namespace Sequence
                         var NewChannel = new Channel.Channel(Ch);
                         ChannelMgr.Add(NewChannel);
                         Debug.Log("Subscribe: " + Ch.Name);
-                        LobbyMenu.OnSubscribeSuccess();
                     })
                     .AddTo(gameObject);
 
