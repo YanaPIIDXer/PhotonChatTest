@@ -82,6 +82,16 @@ namespace Network
             }
         }
 
+        /// <summary>
+        /// チャンネルのSubscribe
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        public void SubscribeChannel(string ChannelName)
+        {
+            if (Client == null) { return; }
+            Client.Subscribe(ChannelName);
+        }
+
         #region Singleton
         public static ChatConnection Intsance { get { return _Instance; } }
         private static ChatConnection _Instance = new ChatConnection();

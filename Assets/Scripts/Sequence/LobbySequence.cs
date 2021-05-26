@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Network;
+using UniRx;
+using System;
 
 namespace Sequence
 {
@@ -9,5 +12,15 @@ namespace Sequence
     /// </summary>
     public class LobbySequence : MonoBehaviour
     {
+        void Awake()
+        {
+            /*
+            ChatConnection.Instance.OnsSubscribeChannel
+                    .Subscribe((Ch) => Debug.Log(Ch.Name))
+                    .AddTo(gameObject);
+
+            ChatConnection.Instance.SubscribeChannel("Test");
+            */
+        }
     }
 }
