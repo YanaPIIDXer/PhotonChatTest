@@ -57,6 +57,19 @@ namespace Network
             Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
             Listener.OnSubscribeChannel = (Channel) => OnSubscribeChannelSubject.OnNext(Channel);
 
+            // === テスト ===
+            OnConnect.Subscribe((_) => Client.Subscribe("Test"));
+            OnSubscribeChannel.Subscribe((Channel) =>
+            {
+                // ここを通るタイミングでは、Client.PublicChannelsにデータが入っている
+                Debug.Log("PublicChannel Count:" + Client.PublicChannels.Count);
+                foreach (var Kv in Client.PublicChannels)
+                {
+                    Debug.Log(Kv.Value.Name);
+                }
+            });
+            // =============
+
             Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
             ServiceDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0 / 60))
