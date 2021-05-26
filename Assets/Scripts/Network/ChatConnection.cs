@@ -43,8 +43,10 @@ namespace Network
 
             Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
 
-            // テスト用
+            // ===== テスト用 ======
             OnConnect.Subscribe((_) => Client.Subscribe(new string[] { "Channel1", "Channel2", "Channel3" }));
+            Listener.OnSubscribeChannel = (Channel) => Client.PublishMessage(Channel, "Test");
+            // ====================
 
             Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);

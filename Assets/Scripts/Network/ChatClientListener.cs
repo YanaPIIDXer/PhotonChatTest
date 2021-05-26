@@ -17,6 +17,11 @@ namespace Network
         /// </summary>
         public Action OnConnect { set; private get; }
 
+        /// <summary>
+        /// チャンネルをSubscribeした
+        /// </summary>
+        public Action<string> OnSubscribeChannel { set; private get; }
+
         public void DebugReturn(DebugLevel level, string message)
         {
             if (level != DebugLevel.ERROR)
@@ -70,6 +75,7 @@ namespace Network
                 if (results[i])
                 {
                     DebugReturn(DebugLevel.INFO, channels[i]);
+                    OnSubscribeChannel?.Invoke(channels[i]);
                 }
                 else
                 {
