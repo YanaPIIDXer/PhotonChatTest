@@ -6,7 +6,7 @@ using UniRx;
 using UniRx.Triggers;
 using System;
 
-namespace UI
+namespace UI.LogIn
 {
     /// <summary>
     /// ログインボタンインタフェース
