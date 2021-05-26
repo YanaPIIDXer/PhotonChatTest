@@ -4,6 +4,7 @@ using UnityEngine;
 using Network;
 using UniRx;
 using System;
+using Channel;
 
 namespace Sequence
 {
@@ -12,10 +13,19 @@ namespace Sequence
     /// </summary>
     public class LobbySequence : MonoBehaviour
     {
+        /// <summary>
+        /// チャンネル管理
+        /// </summary>
+        private ChannelManager ChannelMgr = new ChannelManager();
+
         void Awake()
         {
             ChatConnection.Instance.OnSubscribeChannel
-                    .Subscribe((Ch) => Debug.Log(Ch.Name))
+                    .Subscribe((Ch) =>
+                    {
+                        var NewChannel = new Channel.Channel(Ch);
+                        ChannelMgr.Add(NewChannel);
+                    })
                     .AddTo(gameObject);
 
             ChatConnection.Instance.SubscribeChannel("Test");
