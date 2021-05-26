@@ -49,6 +49,9 @@ namespace Network
         /// </summary>
         public void Connect()
         {
+            // 一旦Disconnect
+            Disconnect();
+
             var Listener = new ChatClientListener();
 
             Listener.OnConnect = () => OnConnectSubject.OnNext(Unit.Default);
