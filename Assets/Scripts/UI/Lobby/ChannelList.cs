@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Lobby
 {
@@ -9,5 +10,14 @@ namespace UI.Lobby
     /// </summary>
     public class ChannelList : MonoBehaviour
     {
+        /// <summary>
+        /// リストビュー
+        /// </summary>
+        private ScrollRect ListView = null;
+
+        void Awake()
+        {
+            ListView = GetComponent<ScrollRect>();
+        }
     }
 }

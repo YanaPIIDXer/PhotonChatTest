@@ -36,6 +36,12 @@ namespace UI.Lobby
         private ChannelSubscribe SubscribeForm = null;
 
         /// <summary>
+        /// 購読リスト
+        /// </summary>
+        [SerializeField]
+        private ChannelList SubscribeList = null;
+
+        /// <summary>
         /// チャンネルを購読した
         /// </summary>
         public IObservable<string> OnSubscribeChannel => SubscribeForm.OnSubscribe;
