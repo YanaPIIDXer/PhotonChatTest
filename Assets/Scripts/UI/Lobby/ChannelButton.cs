@@ -37,7 +37,6 @@ namespace UI.Lobby
             return Obj.GetComponent<ChannelButton>();
         }
         
-        
         /// <summary>
         /// 表示テキスト
         /// </summary>
