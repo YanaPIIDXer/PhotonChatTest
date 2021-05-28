@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
+using UniRx.Triggers;
+using System;
 
 namespace UI.Lobby
 {
@@ -44,5 +47,27 @@ namespace UI.Lobby
         /// </summary>
         [SerializeField]
         private Text DisplayText = null;
+
+        /// <summary>
+        /// 押された
+        /// </summary>
+        /// <value></value>
+        public IObservable<Unit> OnPress
+        {
+            get
+            {
+                if (MyButton == null)
+                {
+                    MyButton = GetComponent<Button>();
+                }
+                return MyButton.OnClickAsObservable();
+            }
+        }
+
+        /// <summary>
+        /// ボタン
+        /// HACK:ネーミング（ｒｙ
+        /// </summary>
+        private Button MyButton = null;
     }
 }
