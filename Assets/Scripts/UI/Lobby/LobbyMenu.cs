@@ -53,6 +53,7 @@ namespace UI.Lobby
         public void OnSubscribeSuccess(IChannel SubscribedChannel)
         {
             SubscribeForm.ResetChannelNameInput();
+            SubscribeList.Add(SubscribedChannel.Name);
         }
     }
 }

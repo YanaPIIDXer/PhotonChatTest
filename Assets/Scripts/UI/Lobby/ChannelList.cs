@@ -19,5 +19,16 @@ namespace UI.Lobby
         {
             ListView = GetComponent<ScrollRect>();
         }
+
+        /// <summary>
+        /// 追加
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        public void Add(string ChannelName)
+        {
+            var ChBtn = ChannelButton.Create(ChannelName);
+            ChBtn.transform.SetParent(ListView.content);
+            ChBtn.transform.localPosition = Vector3.zero;
+        }
     }
 }

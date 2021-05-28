@@ -34,9 +34,11 @@ namespace UI.Lobby
             }
 
             var Obj = Instantiate(Prefab);
-            return Obj.GetComponent<ChannelButton>();
+            var BtnCmp = Obj.GetComponent<ChannelButton>();
+            BtnCmp.DisplayText.text = ChannelName;
+            return BtnCmp;
         }
-        
+
         /// <summary>
         /// 表示テキスト
         /// </summary>
