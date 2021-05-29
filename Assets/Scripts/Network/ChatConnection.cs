@@ -92,6 +92,17 @@ namespace Network
             Client.Subscribe(ChannelName);
         }
 
+        /// <summary>
+        /// メッセージ送信
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        /// <param name="Message">メッセージ</param>
+        public void SendMessage(string ChannelName, string Message)
+        {
+            if (Client == null) { return; }
+            Client.PublishMessage(ChannelName, Message);
+        }
+
         #region Singleton
         public static ChatConnection Instance { get { return _Instance; } }
         private static ChatConnection _Instance = new ChatConnection();

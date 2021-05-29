@@ -61,7 +61,7 @@ namespace Sequence
                      .AddTo(gameObject);
 
             LobbyMenu.OnSay
-                     .Subscribe((Info) => Debug.Log("Say  Channel:" + Info.ChannelName + " Message:" + Info.Message))
+                     .Subscribe((Info) => ChatConnection.Instance.SendMessage(Info.ChannelName, Info.Message))
                      .AddTo(gameObject);
         }
     }
