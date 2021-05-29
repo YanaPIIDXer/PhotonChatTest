@@ -29,6 +29,7 @@ namespace UI.Lobby
             var ChBtn = ChannelButton.Create(ChannelName);
             ChBtn.transform.SetParent(ListView.content);
             ChBtn.transform.localPosition = Vector3.zero;
+            ChBtn.Selected = false;
         }
     }
 }

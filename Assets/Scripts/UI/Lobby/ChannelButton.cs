@@ -86,5 +86,30 @@ namespace UI.Lobby
         /// HACK:ネーミング（ｒｙ
         /// </summary>
         private Button MyButton = null;
+
+        /// <summary>
+        /// 選択されているか？
+        /// </summary>
+        public bool Selected
+        {
+            set
+            {
+                Color Col = Color.white;
+                if (value)
+                {
+                    Col = Color.yellow;
+                }
+                var Img = GetComponent<Image>();
+                Img.color = Col;
+            }
+        }
+
+        void Awake()
+        {
+            if (MyButton == null)
+            {
+                MyButton = GetComponent<Button>();
+            }
+        }
     }
 }
