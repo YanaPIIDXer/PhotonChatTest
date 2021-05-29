@@ -77,6 +77,9 @@ namespace UI.Lobby
                         .Select((Value) => string.IsNullOrEmpty(Value))
                         .Subscribe((IsEmpty) => SayButton.interactable = !IsEmpty)
                         .AddTo(gameObject);
+
+            OnSay.Subscribe((_) => MessageInput.text = "")
+                 .AddTo(gameObject);
         }
     }
 }
