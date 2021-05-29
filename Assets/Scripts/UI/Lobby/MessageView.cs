@@ -35,7 +35,7 @@ namespace UI.Lobby
         /// 追加
         /// </summary>
         /// <param name="Messages">メッセージリスト</param>
-        public void Add(List<object> Messages)
+        public void AddList(object[] Messages)
         {
             foreach (var Msg in Messages)
             {

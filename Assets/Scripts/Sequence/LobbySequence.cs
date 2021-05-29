@@ -48,6 +48,10 @@ namespace Sequence
                     })
                     .AddTo(gameObject);
 
+            ChatConnection.Instance.OnRecvMessage
+                          .Subscribe((Pack) => LobbyMenu.OnRecvMessage(Pack.ChannelName, Pack.Messages))
+                          .AddTo(gameObject);
+
             LobbyMenu.OnSubscribeChannel
                      .Subscribe((Name) => ChatConnection.Instance.SubscribeChannel(Name))
                      .AddTo(gameObject);

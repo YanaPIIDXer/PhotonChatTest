@@ -38,6 +38,13 @@ namespace UI.Lobby
         /// 発言した
         /// </summary>
         IObservable<MessageInfo> OnSay { get; }
+
+        /// <summary>
+        /// メッセージを受信した
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        /// <param name="Messages">メッセージリスト</param>
+        void OnRecvMessage(string ChannelName, object[] Messages);
     }
 
     /// <summary>
@@ -86,6 +93,20 @@ namespace UI.Lobby
         public IObservable<MessageInfo> OnSay => Say.OnSay;
 
         /// <summary>
+        /// メッセージを受信した
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        /// <param name="Messages">メッセージリスト</param>
+        public void OnRecvMessage(string ChannelName, object[] Messages)
+        {
+            // HACK:↓現在のチャンネル名を保持しているのがコイツなので
+            if (Say.CurrentChannel == ChannelName)
+            {
+                MsgView.AddList(Messages);
+            }
+        }
+
+        /// <summary>
         /// 購読成功
         /// </summary>
         /// <param name="SubscribedChannel">購読したチャンネル</param>
@@ -102,7 +123,7 @@ namespace UI.Lobby
         public void SetMessageList(List<object> Messages)
         {
             MsgView.Clear();
-            MsgView.Add(Messages);
+            MsgView.AddList(Messages.ToArray());
         }
 
         void Awake()
