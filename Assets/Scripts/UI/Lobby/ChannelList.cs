@@ -22,6 +22,16 @@ namespace UI.Lobby
         /// </summary>
         private Dictionary<string, ChannelButton> ButtonDic = new Dictionary<string, ChannelButton>();
 
+        /// <summary>
+        /// チャンネル選択時のSubject
+        /// </summary>
+        private Subject<string> OnSelectCahnnelSubject = new Subject<string>();
+
+        /// <summary>
+        /// チャンネルが選択された
+        /// </summary>
+        public IObservable<string> OnSelectChannel { get { return OnSelectCahnnelSubject; } }
+
         void Awake()
         {
             ListView = GetComponent<ScrollRect>();
@@ -46,6 +56,7 @@ namespace UI.Lobby
                      {
                          Kv.Value.Selected = Kv.Key == Name;
                      }
+                     OnSelectCahnnelSubject.OnNext(Name);
                  });
         }
     }

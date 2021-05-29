@@ -22,6 +22,11 @@ namespace UI.Lobby
         /// </summary>
         /// <param name="SubscribedChannel">購読したチャンネル</param>
         void OnSubscribeSuccess(IChannel SubscribedChannel);
+
+        /// <summary>
+        /// チャンネルを選択した
+        /// </summary>
+        IObservable<string> OnSelectChannel { get; }
     }
 
     /// <summary>
@@ -45,6 +50,11 @@ namespace UI.Lobby
         /// チャンネルを購読した
         /// </summary>
         public IObservable<string> OnSubscribeChannel => SubscribeForm.OnSubscribe;
+
+        /// <summary>
+        /// チャンネルを選択した
+        /// </summary>
+        public IObservable<string> OnSelectChannel => SubscribeList.OnSelectChannel;
 
         /// <summary>
         /// 購読成功
