@@ -51,7 +51,7 @@ namespace UI.Lobby
             for (var i = ListView.content.childCount - 1; i >= 0; i--)
             {
                 var Child = ListView.content.GetChild(i);
-                Destroy(Child);
+                Destroy(Child.gameObject);
             }
         }
     }
