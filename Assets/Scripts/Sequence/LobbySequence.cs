@@ -45,12 +45,18 @@ namespace Sequence
                         }
                         var NewChannel = new Channel.Channel(Ch);
                         ChannelMgr.Add(NewChannel);
-                        Debug.Log("Subscribe: " + Ch.Name);
                     })
                     .AddTo(gameObject);
 
             LobbyMenu.OnSubscribeChannel
                      .Subscribe((Name) => ChatConnection.Instance.SubscribeChannel(Name))
+                     .AddTo(gameObject);
+
+            LobbyMenu.OnSelectChannel
+                     .Subscribe((Name) =>
+                     {
+                         Debug.Log("Select Channel:" + Name);
+                     })
                      .AddTo(gameObject);
         }
     }
