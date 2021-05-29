@@ -59,11 +59,6 @@ namespace UI.Lobby
         private MessageView MsgView = null;
 
         /// <summary>
-        /// 現在のチャンネル
-        /// </summary>
-        private string CurrentChannel = "";
-
-        /// <summary>
         /// チャンネルを購読した
         /// </summary>
         public IObservable<string> OnSubscribeChannel => SubscribeForm.OnSubscribe;
@@ -91,11 +86,6 @@ namespace UI.Lobby
         {
             MsgView.Clear();
             MsgView.Add(Messages);
-        }
-
-        void Awake()
-        {
-            OnSelectChannel.Subscribe((Name) => CurrentChannel = Name);
         }
     }
 }
