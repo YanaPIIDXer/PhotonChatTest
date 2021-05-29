@@ -55,7 +55,12 @@ namespace Sequence
             LobbyMenu.OnSelectChannel
                      .Subscribe((Name) =>
                      {
-                         Debug.Log("Select Channel:" + Name);
+                         List<object> Msgs = ChannelMgr.GetMessages(Name);
+                         Debug.Log("MessageCount:" + Msgs.Count);
+                         foreach (var Msg in Msgs)
+                         {
+                             Debug.Log(Msg.ToString());
+                         }
                      })
                      .AddTo(gameObject);
         }

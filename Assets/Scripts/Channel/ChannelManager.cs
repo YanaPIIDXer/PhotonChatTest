@@ -75,5 +75,16 @@ namespace Channel
         {
             return ChannelDic.ContainsKey(ChannelName);
         }
+
+        /// <summary>
+        /// メッセージリスト取得
+        /// </summary>
+        /// <param name="ChannelName">チャンネル名</param>
+        /// <returns>メッセージリスト</returns>
+        public List<object> GetMessages(string ChannelName)
+        {
+            if (!Exists(ChannelName)) { return new List<object>(); }
+            return ChannelDic[ChannelName].Messages;
+        }
     }
 }

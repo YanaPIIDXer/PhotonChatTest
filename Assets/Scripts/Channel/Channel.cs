@@ -14,6 +14,11 @@ namespace Channel
         /// チャンネル名
         /// </summary>
         string Name { get; }
+
+        /// <summary>
+        /// メッセージリスト
+        /// </summary>
+        List<object> Messages { get; }
     }
 
     /// <summary>
@@ -27,12 +32,18 @@ namespace Channel
         public string Name { get; private set; }
 
         /// <summary>
+        /// メッセージリスト
+        /// </summary>
+        public List<object> Messages { get; private set; }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="Src">Photonが定義したチャンネルクラス</param>
         public Channel(ChatChannel Src)
         {
             Name = Src.Name;
+            Messages = Src.Messages;
         }
     }
 }
