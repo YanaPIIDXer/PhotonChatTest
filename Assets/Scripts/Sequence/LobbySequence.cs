@@ -59,6 +59,10 @@ namespace Sequence
 
                      })
                      .AddTo(gameObject);
+
+            LobbyMenu.OnSay
+                     .Subscribe((Info) => Debug.Log("Say  Channel:" + Info.ChannelName + " Message:" + Info.Message))
+                     .AddTo(gameObject);
         }
     }
 }

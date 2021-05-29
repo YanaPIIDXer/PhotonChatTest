@@ -33,6 +33,11 @@ namespace UI.Lobby
         /// </summary>
         /// <param name="Messages">メッセージリスト</param>
         void SetMessageList(List<object> Messages);
+
+        /// <summary>
+        /// 発言した
+        /// </summary>
+        IObservable<MessageInfo> OnSay { get; }
     }
 
     /// <summary>
@@ -74,6 +79,11 @@ namespace UI.Lobby
         /// チャンネルを選択した
         /// </summary>
         public IObservable<string> OnSelectChannel => SubscribeList.OnSelectChannel;
+
+        /// <summary>
+        /// 発言した
+        /// </summary>
+        public IObservable<MessageInfo> OnSay => Say.OnSay;
 
         /// <summary>
         /// 購読成功
