@@ -68,7 +68,7 @@ namespace UI.Lobby
         /// <summary>
         /// 押された
         /// </summary>
-        public IObservable<Unit> OnPress
+        public IObservable<string> OnPress
         {
             get
             {
@@ -76,7 +76,8 @@ namespace UI.Lobby
                 {
                     MyButton = GetComponent<Button>();
                 }
-                return MyButton.OnClickAsObservable();
+                return MyButton.OnClickAsObservable()
+                               .Select((_) => Name);
             }
         }
 
