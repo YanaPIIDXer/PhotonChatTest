@@ -2849,6 +2849,7 @@ MonoBehaviour:
   SubscribeForm: {fileID: 988709553}
   SubscribeList: {fileID: 1182190701}
   MsgView: {fileID: 1436556950}
+  Say: {fileID: 966590800}
 --- !u!114 &1924103004
 MonoBehaviour:
   m_ObjectHideFlags: 0

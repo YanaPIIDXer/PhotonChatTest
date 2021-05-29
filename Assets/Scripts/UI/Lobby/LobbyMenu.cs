@@ -59,6 +59,13 @@ namespace UI.Lobby
         private MessageView MsgView = null;
 
         /// <summary>
+        /// 発言Unit
+        /// ※ネーミング（ｒｙ
+        /// </summary>
+        [SerializeField]
+        private SayUnit Say = null;
+
+        /// <summary>
         /// チャンネルを購読した
         /// </summary>
         public IObservable<string> OnSubscribeChannel => SubscribeForm.OnSubscribe;
@@ -86,6 +93,12 @@ namespace UI.Lobby
         {
             MsgView.Clear();
             MsgView.Add(Messages);
+        }
+
+        void Awake()
+        {
+            OnSelectChannel.Subscribe((Name) => Say.CurrentChannel = Name)
+                           .AddTo(gameObject);
         }
     }
 }
