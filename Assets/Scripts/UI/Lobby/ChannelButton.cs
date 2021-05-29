@@ -38,7 +38,7 @@ namespace UI.Lobby
 
             var Obj = Instantiate(Prefab);
             var BtnCmp = Obj.GetComponent<ChannelButton>();
-            BtnCmp.DisplayText.text = ChannelName;
+            BtnCmp.Name = ChannelName;
             return BtnCmp;
         }
 
@@ -49,9 +49,25 @@ namespace UI.Lobby
         private Text DisplayText = null;
 
         /// <summary>
+        /// チャンネル名
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+                DisplayText.text = _Name;
+            }
+        }
+        private string _Name = "";
+
+        /// <summary>
         /// 押された
         /// </summary>
-        /// <value></value>
         public IObservable<Unit> OnPress
         {
             get
