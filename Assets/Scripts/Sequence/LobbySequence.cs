@@ -56,7 +56,7 @@ namespace Sequence
                      .Subscribe((Name) =>
                      {
                          List<object> Msgs = ChannelMgr.GetMessages(Name);
-
+                         LobbyMenu.SetMessageList(Msgs);
                      })
                      .AddTo(gameObject);
 
