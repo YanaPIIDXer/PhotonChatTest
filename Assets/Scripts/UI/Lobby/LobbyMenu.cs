@@ -27,6 +27,12 @@ namespace UI.Lobby
         /// チャンネルを選択した
         /// </summary>
         IObservable<string> OnSelectChannel { get; }
+
+        /// <summary>
+        /// メッセージリストをセット
+        /// </summary>
+        /// <param name="Messages">メッセージリスト</param>
+        void SetMessageList(List<object> Messages);
     }
 
     /// <summary>
@@ -47,6 +53,12 @@ namespace UI.Lobby
         private ChannelList SubscribeList = null;
 
         /// <summary>
+        /// メッセージビュー
+        /// </summary>
+        [SerializeField]
+        private MessageView MsgView = null;
+
+        /// <summary>
         /// チャンネルを購読した
         /// </summary>
         public IObservable<string> OnSubscribeChannel => SubscribeForm.OnSubscribe;
@@ -64,6 +76,16 @@ namespace UI.Lobby
         {
             SubscribeForm.ResetChannelNameInput();
             SubscribeList.Add(SubscribedChannel.Name);
+        }
+
+        /// <summary>
+        /// メッセージリストをセット
+        /// </summary>
+        /// <param name="Messages">メッセージリスト</param>
+        public void SetMessageList(List<object> Messages)
+        {
+            MsgView.Clear();
+            MsgView.Add(Messages);
         }
     }
 }
