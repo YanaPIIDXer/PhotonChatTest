@@ -8,6 +8,27 @@ using System;
 namespace Network
 {
     /// <summary>
+    /// 受信したメッセージの情報をまとめる構造体
+    /// </summary>
+    public struct RecvMessagePack
+    {
+        /// <summary>
+        /// チャンネル名
+        /// </summary>
+        public string ChannelName;
+
+        /// <summary>
+        /// 送信者名
+        /// </summary>
+        public string[] Senders;
+
+        /// <summary>
+        /// メッセージ
+        /// </summary>
+        public object[] Messages;
+    }
+
+    /// <summary>
     /// イベントリスナ
     /// </summary>
     public class ChatClientListener : IChatClientListener
@@ -21,6 +42,11 @@ namespace Network
         /// チャンネルをSubscribeした
         /// </summary>
         public Action<string> OnSubscribeChannel { set; private get; }
+
+        /// <summary>
+        /// メッセージを受信した
+        /// </summary>
+        public Action<RecvMessagePack> OnRecvMessage { set; private get; }
 
         public void DebugReturn(DebugLevel level, string message)
         {
@@ -49,11 +75,13 @@ namespace Network
 
         public void OnGetMessages(string channelName, string[] senders, object[] messages)
         {
-            DebugReturn(DebugLevel.INFO, "OnGetMessage Channel:" + channelName);
-            foreach (var Message in messages)
+            RecvMessagePack Pack = new RecvMessagePack
             {
-                DebugReturn(DebugLevel.INFO, Message.ToString());
-            }
+                ChannelName = channelName,
+                Senders = senders,
+                Messages = messages
+            };
+            OnRecvMessage?.Invoke(Pack);
         }
 
         public void OnPrivateMessage(string sender, object message, string channelName)

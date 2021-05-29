@@ -45,6 +45,16 @@ namespace Network
         public IObservable<ChatChannel> OnSubscribeChannel { get { return OnSubscribeChannelSubject; } }
 
         /// <summary>
+        /// メッセージ受信時のSubject
+        /// </summary>
+        private Subject<RecvMessagePack> OnRecvMessageSubject = new Subject<RecvMessagePack>();
+
+        /// <summary>
+        /// メッセージを受信した
+        /// </summary>
+        public IObservable<RecvMessagePack> OnRecvMessage { get { return OnRecvMessageSubject; } }
+
+        /// <summary>
         /// 接続
         /// </summary>
         public void Connect()
@@ -60,6 +70,7 @@ namespace Network
                 var Ch = Client.PublicChannels[Channel];
                 OnSubscribeChannelSubject.OnNext(Ch);
             };
+            Listener.OnRecvMessage = (Pack) => OnRecvMessageSubject.OnNext(Pack);
 
             Client = new ChatClient(Listener);
             Client.Connect(EnvironmentVariables.Insatnce.ApplicationId, "1.0", null);
